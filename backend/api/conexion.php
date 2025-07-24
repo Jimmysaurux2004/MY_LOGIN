@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../../utils/logs_config.php';
+require_once __DIR__ . '/../utils/logs_config.php';
 $host = getenv('MYSQL_HOST') ?: '127.0.0.1';
 $port = getenv('MYSQL_PORT') ?: '3306';
 $dbname = getenv('MYSQL_DATABASE');
