@@ -1,0 +1,35 @@
+services:
+  backend:
+    build: ../backend
+    container_name: backend_app
+    ports:
+      - "8075:80"
+    volumes:
+      - ../backend:/var/www/html
+    env_file:
+      - .env  # ✅ Ahora lee el .env que está en la misma carpeta
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    env_file:
+      - .env  # ✅ También aquí
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - ../db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3310:3306"
+
+  adminer:
+    image: adminer
+    container_name: adminer_db
+    restart: always
+    ports:
+      - "8076:8080"
