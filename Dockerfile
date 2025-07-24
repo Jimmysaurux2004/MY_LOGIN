@@ -7,6 +7,7 @@ RUN docker-php-ext-install pdo pdo_mysql mysqli
 # ✅ Copiar SOLO el backend al contenedor
 WORKDIR /var/www/html
 COPY backend/ . 
+COPY utils/ utils/
 
 # ✅ Activar mod_rewrite para URLs amigables
 RUN a2enmod rewrite
